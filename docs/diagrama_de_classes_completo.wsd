@@ -1,0 +1,29 @@
+@startuml
+
+title Diagrama de classes completo
+
+package Controllers #DDDDDD {
+
+    class SellerController{}
+    class ManagerController {}
+    class AdministratorController {}
+
+
+}
+
+
+package Repositories #DDDDDD {
+
+    class SellerRepositorty{}
+    class ManagerRespository {}
+    class AdministratorRepository {}
+    
+
+}
+
+
+SellerController --> SellerRepositorty
+ManagerController --> ManagerRespository
+AdministratorController --> AdministratorRepository
+
+@enduml

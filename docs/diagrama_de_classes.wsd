@@ -1,0 +1,71 @@
+@startuml
+    title Diagrama de classes - Seller Management
+
+    class Permission {
+
+    }
+
+    note bottom of Permission : Write \nRead \nUpdate \nDelete
+
+    class User {
+        - login : String 
+        - email : String
+        - permissions : List<Permission>
+    }
+
+    class Order {
+
+    }
+
+    
+
+    class Client {
+        - active : Boolean
+    }
+
+    class Person {
+
+    }
+
+    class SalesRepresentative {
+        
+        getClients()
+        getOrders()
+    }
+
+    class Manager {
+        getSalesRepresentativeList()
+        getClientsBySalesRepresentatives()
+    }
+
+    class Administrator {
+        addSalesRepresentative(seller : SalesRepresentative) : SalesRepresentative
+        addManager(manager : Manager) : Manager
+        changePermission(user : User) : Boolean
+        getAllPeople() : List<Person>
+    }
+
+    class Item {
+
+    }
+
+    class Fabric {
+
+    }
+
+    Person <|-- SalesRepresentative
+    Person <|-- Manager
+    Person <|-- Administrator
+    SalesRepresentative "1" --> "1" User
+    Manager "1" --> "1" User
+    Administrator "1" --> "1" User
+    
+    User "*" --> "*" Permission
+
+    SalesRepresentative "*" --> "1" Client
+    SalesRepresentative "*" --> "1" Order
+    Order "*" --> "*" Item
+    Client "*" --> "1" Order
+    
+    
+@enduml

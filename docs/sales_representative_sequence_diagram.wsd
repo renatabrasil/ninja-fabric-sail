@@ -1,0 +1,39 @@
+@startuml
+
+title Cadastro de usuários
+
+actor Manager
+participant SellerController
+participant SellerRepository
+database SalesDb
+
+activate Manager
+
+Manager -> SellerController : saveSalesRepresentative()
+
+    activate SellerController
+
+    SellerController -> SellerRepository : save(seller : SalesRepresentative)
+
+        activate SellerRepository
+
+        SellerRepository --> SellerController : true
+
+            activate SalesDb
+
+            SellerRepository -> SalesDb
+
+            deactivate SalesDb
+
+        deactivate SellerRepository
+
+    SellerController --> Manager : SalesRepresentative
+
+    deactivate SellerController
+
+
+
+
+deactivate Manager
+
+@enduml
