@@ -1,8 +1,9 @@
 @startuml
     title Diagrama de classes - Seller Management
 
-    class Permission {
-
+    package Domain #DDDDDD {
+        class Permission {
+        - description : String
     }
 
     note bottom of Permission : Write \nRead \nUpdate \nDelete
@@ -14,58 +15,128 @@
     }
 
     class Order {
-
+        - client : Client
+        - seller : Seller
+        - items : List<Item>
     }
 
-    
-
     class Client {
+        - name
+        - cnpj
         - active : Boolean
     }
 
-    class Person {
+    class Employee {
+        - name : String
+        - address : String
+        - cpf : String
+        - cnpj : String
+        - celular : String
 
     }
 
-    class SalesRepresentative {
+    class Seller {
         
-        getClients()
-        getOrders()
+        getClients() : List<Client>
+        getOrders() : List<Order>
     }
 
     class Manager {
-        getSalesRepresentativeList()
-        getClientsBySalesRepresentatives()
+        - sector : String
+        getSellers() : List<Sellers>
+        getClientsBySeller(seller : Seller) : List<Client>
     }
 
     class Administrator {
-        addSalesRepresentative(seller : SalesRepresentative) : SalesRepresentative
-        addManager(manager : Manager) : Manager
+        saveSeller(seller : seller) : Seller
+        saveManager(manager : Manager) : Manager
         changePermission(user : User) : Boolean
-        getAllPeople() : List<Person>
+        getAllEmployees() : List<Employee>
+        createAccount(employee : Employee) : Employee
     }
 
     class Item {
-
+        - fabric : Fabric
+        - quantity : Double
+        - typeOfPackaging : Packaging
     }
 
     class Fabric {
-
+        - code : String
+        - description : String
     }
 
-    Person <|-- SalesRepresentative
-    Person <|-- Manager
-    Person <|-- Administrator
-    SalesRepresentative "1" --> "1" User
-    Manager "1" --> "1" User
-    Administrator "1" --> "1" User
+    Employee <|-- Seller #line:blue
+    Employee <|-- Manager #line:blue
+    Employee <|-- Administrator #line:blue
+    Seller "1" --> "1" User #line:blue
+    Manager "1" --> "1" User #line:blue
+    Administrator "1" --> "1" User #line:blue
     
-    User "*" --> "*" Permission
+    User "*" --> "*" Permission #line:blue
 
-    SalesRepresentative "*" --> "1" Client
-    SalesRepresentative "*" --> "1" Order
-    Order "*" --> "*" Item
-    Client "*" --> "1" Order
+    Seller "*" --> "1" Client #line:blue
+    Seller "*" --> "1" Order #line:blue
+    Order "*" --> "*" Item #line:blue
+    Client "*" --> "1" Order #line:blue
+}
+
+package Controllers #DDDDDD {
+
+    class SellerController{
+        
+    }
+    class ManagerController {}
+    class AdministratorController {}
+
+}
+
+package Processors #DDDDDD {
+
+    interface ProcessorFactory {
+        getProcessor()
+        process()
+    }
+
+    class SellerProcessor{
+        saveSeller()
+    }
+    class ManagerProcessor {
+        saveManager()
+    }
+    class AdministratorProcessor {
+        
+    }
+
+}
+
+package Repositories #DDDDDD {
+
+    class SellerRepository{}
+    class ManagerRepository {}
+    class AdministratorRepository {}
+
+}
+
+package SalesDb <<Database>> #LightBlue {
+  
+}
+
+SellerProcessor --> SellerRepository
+ManagerProcessor --> ManagerRepository
+AdministratorProcessor --> AdministratorRepository
+
+ProcessorFactory <.. SellerProcessor #line:blue
+ProcessorFactory <.. ManagerProcessor #line:blue
+ProcessorFactory <.. AdministratorProcessor #line:blue
+
+SellerRepository --> SalesDb
+ManagerRepository --> SalesDb
+AdministratorRepository --> SalesDb
+
+SellerController --> ProcessorFactory
+ManagerController --> ProcessorFactory
+AdministratorController --> ProcessorFactory
     
     
 @enduml

@@ -4,26 +4,37 @@ title Diagrama de classes completo
 
 package Controllers #DDDDDD {
 
-    class SellerController{}
+    class SellerController{
+        
+    }
     class ManagerController {}
     class AdministratorController {}
 
+}
+
+package Processors #DDDDDD {
+
+    class SellerProcessor{}
+    class ManagerProcessor {}
+    class AdministratorProcessor {}
 
 }
 
 
 package Repositories #DDDDDD {
 
-    class SellerRepositorty{}
-    class ManagerRespository {}
+    class SellerRepository{}
+    class ManagerRepository {}
     class AdministratorRepository {}
     
-
 }
 
+SellerController --> SellerProcessor
+ManagerController --> ManagerProcessor
+AdministratorController --> AdministratorProcessor
 
-SellerController --> SellerRepositorty
-ManagerController --> ManagerRespository
-AdministratorController --> AdministratorRepository
+SellerProcessor --> SellerRepository
+ManagerProcessor --> ManagerRepository
+AdministratorProcessor --> AdministratorRepository
 
 @enduml

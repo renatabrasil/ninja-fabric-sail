@@ -9,11 +9,11 @@ database SalesDb
 
 activate Manager
 
-Manager -> SellerController : saveSalesRepresentative()
+Manager -> SellerController : saveSeller(seller : Seller)
 
     activate SellerController
 
-    SellerController -> SellerRepository : save(seller : SalesRepresentative)
+    SellerController -> SellerRepository : save(seller : Seller)
 
         activate SellerRepository
 
@@ -27,7 +27,7 @@ Manager -> SellerController : saveSalesRepresentative()
 
         deactivate SellerRepository
 
-    SellerController --> Manager : SalesRepresentative
+    SellerController --> Manager : seller : Seller
 
     deactivate SellerController
 
