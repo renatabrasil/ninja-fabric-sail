@@ -7,7 +7,7 @@ on:
     types: [opened, synchronize, reopened]
 jobs:
   build:
-    name: Build
+    name: Build Seller Management
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -33,4 +33,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          workingDirectory: seller-management/
         run: ./gradlew build sonarqube --info
