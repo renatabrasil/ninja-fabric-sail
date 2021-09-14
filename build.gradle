@@ -1,13 +1,21 @@
 plugins {
     id 'java'
-
+    id 'org.sonarqube' version '3.3'
+    id 'jacoco'
 }
+
+apply plugin: 'java'
 
 group 'br.com.renata'
 version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+}
+
+file("services").eachDir { p ->
+//    include p.name
+//    project(":${p.name}").projectDir = p
 }
 
 dependencies {
@@ -19,4 +27,33 @@ test {
     useJUnitPlatform()
 }
 
+sonarqube {
+    properties {
+        property "sonar.projectKey", "renatabrasil_ninja-fabric-sale"
+//		property "sonar.projectBaseDir", "seller-management/src"
+        property "sonar.organization", "renatabrasil"
+        property "sonar.host.url", "https://sonarcloud.io"
+//        property "sonar.exclusions", "**/*Generated.java"
+//		properties["sonar.sources"] += sourceSets.src
+//		properties["sonar.tests"] += sourceSets.integTest.allSource.srcDirs
+    }
+}
 
+subprojects {
+    version = '1.0'
+    sonarqube {
+        properties {
+            property "sonar.sources", "src/main/java"
+            property "sonar.tests", "src/test/java"
+            // I was testing with JaCoCo, so the next line is not needed if you're using some other tool
+//            property "sonar.coverage.jacoco.xmlReportPaths", "../build/reports/jacoco/codeCoverageReport/codeCoverageReport.xml"
+            property "sonar.host.url", "https://sonarcloud.io"
+        }
+    }
+}
+
+//jacocoTestReport {
+//	reports {
+//		xml.enabled true
+//	}
+//}

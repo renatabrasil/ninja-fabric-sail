@@ -2,9 +2,14 @@ plugins {
 	id 'org.springframework.boot' version '2.5.4'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
-	id 'org.sonarqube' version '3.0'
-	id 'jacoco'
+	id 'application'
+//	id 'org.sonarqube' version '3.0'
 }
+
+application {
+	mainClass = 'br.com.ninja.application.SellerManagementApplication'
+}
+apply plugin: 'java'
 
 group = 'br.com.renata'
 version = '0.0.1-SNAPSHOT'
@@ -32,16 +37,4 @@ test {
 	useJUnitPlatform()
 }
 
-sonarqube {
-	properties {
-		property "sonar.projectKey", "renatabrasil_ninja-fabric-sale"
-		property "sonar.organization", "renatabrasil"
-		property "sonar.host.url", "https://sonarcloud.io"
-	}
-}
 
-jacocoTestReport {
-	reports {
-		xml.enabled true
-	}
-}
