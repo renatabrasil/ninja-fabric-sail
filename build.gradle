@@ -13,11 +13,6 @@ repositories {
     mavenCentral()
 }
 
-file("services").eachDir { p ->
-//    include p.name
-//    project(":${p.name}").projectDir = p
-}
-
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
