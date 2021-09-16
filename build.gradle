@@ -1,10 +1,15 @@
 plugins {
     id 'java'
     id 'org.sonarqube' version '3.3'
-    id 'jacoco'
+//    id 'jacoco'
 }
 
 apply plugin: 'java'
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = "0.7.5.201505241946"
+}
 
 group 'br.com.renata'
 version '1.0-SNAPSHOT'
@@ -12,6 +17,8 @@ version '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 }
+
+
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
@@ -35,20 +42,62 @@ sonarqube {
 }
 
 subprojects {
-    version = '1.0'
+//    version = '1.0'
+    apply plugin: 'jacoco'
+    jacoco {
+        toolVersion = "0.7.5.201505241946"
+    }
+
+    def coverageSourceDirs = [
+            'src/main/java'
+    ]
+
     sonarqube {
         properties {
             property "sonar.sources", "src/main"
             property "sonar.tests", "src/test"
             // I was testing with JaCoCo, so the next line is not needed if you're using some other tool
-//            property "sonar.coverage.jacoco.xmlReportPaths", "../build/reports/jacoco/codeCoverageReport/codeCoverageReport.xml"
+            property "sonar.coverage.jacoco.xmlReportPaths", "/build/reports/jacoco/test/html/index.html"
             property "sonar.host.url", "https://sonarcloud.io"
         }
     }
+
+
+    jacocoTestReport {
+        enabled = false
+//        this.buildDir = fileTree(
+//                dir: './build/classes/debug',
+//                excludes: ['**/R.class',
+//                           '**/R$*.class',
+//                           '**/*$InjectAdapter.class',
+//                           '**/*$ModuleAdapter.class',
+//                           '**/*$ViewInjector*.class'
+//                ])
+//        this.sourceDirectories = files(coverageSourceDirs)
+        executionData("${subprojects.buildDir}/jacoco/test.exec")
+        reports {
+            xml.enabled ( true)
+        }
+    }
+//    jacocoTestReport.enabled(true)
+//    jacocoTestReport.reports.xml.enabled(true)
+//    jacocoTestReport.executionData("${subprojects.buildDir}/jacoco/test.exec")
+//        sourceDirectories = files(coverageSourceDirs)
+//        executionData = files('build/jacoco/testDebug.exec')
+//        executionData = files("${buildDir}/jacoco/testDebugUnitTest.exec")
+//    }
+
+
+    test {
+
+//        useJUnitPlatform()
+        finalizedBy jacocoTestReport
+    }
 }
 
-//jacocoTestReport {
-//	reports {
-//		xml.enabled true
-//	}
-//}
+
+
+
+
+
+

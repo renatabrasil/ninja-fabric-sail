@@ -6,10 +6,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-class SellerManagementApplicationTests {
+public class SellerManagementApplicationTests {
 
 	@Test
-	void contextLoads() {
+	public void contextLoads() {
 		assertEquals(1, 1);
 	}
 
