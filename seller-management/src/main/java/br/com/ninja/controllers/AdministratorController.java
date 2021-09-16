@@ -8,6 +8,10 @@ public class AdministratorController {
 
     @GetMapping("/login")
     public String login() {
-        return "";
+
+        String texto = "fata pora";
+        Integer aahah = 4;
+
+        return texto;
     }
 }
