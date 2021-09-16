@@ -18,6 +18,7 @@ jobs:
         with:
           java-version: 11
       - name: Start containers
+          working-directory: seller-management/
           run: docker-compose -f "docker-compose.yml" up -d --build
       - name: Cache SonarCloud packages
         uses: actions/cache@v1
@@ -37,5 +38,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./gradlew build sonarqube --info
       - name: Stop containers
+          working-directory: seller-management/
           if: always()
           run: docker-compose -f "docker-compose.yml" down
