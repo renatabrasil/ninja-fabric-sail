@@ -41,7 +41,7 @@ subprojects {
             property "sonar.sources", "src/main"
             property "sonar.tests", "src/test"
             // I was testing with JaCoCo, so the next line is not needed if you're using some other tool
-            property "sonar.coverage.jacoco.xmlReportPaths", "../build/reports/jacoco/codeCoverageReport/codeCoverageReport.xml"
+//            property "sonar.coverage.jacoco.xmlReportPaths", "../build/reports/jacoco/codeCoverageReport/codeCoverageReport.xml"
             property "sonar.host.url", "https://sonarcloud.io"
         }
     }

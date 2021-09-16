@@ -1,12 +1,3 @@
-buildscript {
-	ext.kotlin_version = '1.5.30'
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-	}
-}
 plugins {
 	id 'org.springframework.boot' version '2.5.4'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
@@ -18,7 +9,6 @@ application {
 	mainClass = 'br.com.ninja.application.SellerManagementApplication'
 }
 apply plugin: 'java'
-apply plugin: 'kotlin'
 
 group = 'br.com.renata'
 version = '0.0.1-SNAPSHOT'

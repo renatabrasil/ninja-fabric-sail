@@ -5,6 +5,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Consumer {
-    @KafkaListener(topics = "pagamento")
-    public void processMessage(String content) {}
+//    @KafkaListener(topics = "pagamento")
+//    public void processMessage(String content) {}
 }

@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class Producer {
 
-    private KafkaTemplate<String, String> kafkaTemplate;
-
-    public Producer(KafkaTemplate<String, String> kafkaTemplate) {
-        this.kafkaTemplate = kafkaTemplate;
-    }
+//    private KafkaTemplate<String, String> kafkaTemplate;
+//
+//    public Producer(KafkaTemplate<String, String> kafkaTemplate) {
+//        this.kafkaTemplate = kafkaTemplate;
+//    }
 }
