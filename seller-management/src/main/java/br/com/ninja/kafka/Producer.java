@@ -1,21 +1,21 @@
 package br.com.ninja.kafka;
 
+import br.com.ninja.poc.factory_method.VehicleProducerSelectorStrategy;
+import br.com.ninja.poc.factory_method.VehicleSelectorStrategyImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
 public class Producer {
 
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private VehicleProducerSelectorStrategy producerFactory;
 
     @Autowired
-    public Producer(KafkaTemplate<String, String> kafkaTemplate) {
-        this.kafkaTemplate = kafkaTemplate;
+    public Producer(VehicleSelectorStrategyImpl producerFactory) {
+        this.producerFactory = producerFactory;
     }
 
     public void sendMessage(String message) {
-        this.kafkaTemplate.send("pagamento", message);
+        producerFactory.produce(message, "");
     }
 }
