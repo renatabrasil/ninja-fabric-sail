@@ -17,9 +17,9 @@ import static org.mockito.Mockito.*;
 public class VehicleSelectorStrategyImplTest {
 
     private VehicleSelectorStrategyImpl vehicleSelectorStrategy;
-    private VehicleStrategy vehicle1 = mock(VehicleStrategy.class);
-    private RoadVehicleStrategy vehicle2 = mock(RoadVehicleStrategy.class);
-    private MarineVehicleStrategy vehicle3 = mock(MarineVehicleStrategy.class);
+    private final VehicleStrategy vehicle1 = mock(VehicleStrategy.class);
+    private final RoadVehicleStrategy vehicle2 = mock(RoadVehicleStrategy.class);
+    private final MarineVehicleStrategy vehicle3 = mock(MarineVehicleStrategy.class);
 
     @BeforeEach
     public void init() {
