@@ -1,7 +1,7 @@
-package br.com.ninja.poc.factory_method.strategies;
+package br.com.ninja.designpatterns.strategy.strategies;
 
-import br.com.ninja.domain.CriarEAtualizarConta;
-import br.com.ninja.poc.factory_method.Channel;
+import br.com.ninja.kafka.domain.CriarEAtualizarConta;
+import br.com.ninja.designpatterns.strategy.Channel;
 import org.springframework.kafka.core.KafkaTemplate;
 
 public class RoadVehicleStrategy implements VehicleStrategy {

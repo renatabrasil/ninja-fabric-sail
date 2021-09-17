@@ -1,4 +1,4 @@
-package br.com.ninja.poc.factory_method;
+package br.com.ninja.designpatterns.strategy;
 
 public enum Channel {
     SEA,

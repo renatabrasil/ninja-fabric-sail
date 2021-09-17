@@ -1,4 +1,4 @@
-package br.com.ninja.controllers;
+package br.com.ninja.kafka.controllers;
 
 import br.com.ninja.kafka.Producer;
 import org.springframework.beans.factory.annotation.Autowired;

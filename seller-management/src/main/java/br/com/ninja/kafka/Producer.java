@@ -1,7 +1,7 @@
 package br.com.ninja.kafka;
 
-import br.com.ninja.poc.factory_method.VehicleProducerSelectorStrategy;
-import br.com.ninja.poc.factory_method.VehicleSelectorStrategyImpl;
+import br.com.ninja.designpatterns.strategy.VehicleProducerSelectorStrategy;
+import br.com.ninja.designpatterns.strategy.VehicleSelectorStrategyImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

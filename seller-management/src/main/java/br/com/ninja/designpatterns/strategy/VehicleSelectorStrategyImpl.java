@@ -1,6 +1,6 @@
-package br.com.ninja.poc.factory_method;
+package br.com.ninja.designpatterns.strategy;
 
-import br.com.ninja.poc.factory_method.strategies.VehicleStrategy;
+import br.com.ninja.designpatterns.strategy.strategies.VehicleStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

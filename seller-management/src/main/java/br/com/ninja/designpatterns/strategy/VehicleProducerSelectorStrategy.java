@@ -1,6 +1,6 @@
-package br.com.ninja.poc.factory_method;
+package br.com.ninja.designpatterns.strategy;
 
-import br.com.ninja.poc.factory_method.strategies.VehicleStrategy;
+import br.com.ninja.designpatterns.strategy.strategies.VehicleStrategy;
 
 public interface VehicleProducerSelectorStrategy {
     VehicleStrategy getVehicle(String channel);

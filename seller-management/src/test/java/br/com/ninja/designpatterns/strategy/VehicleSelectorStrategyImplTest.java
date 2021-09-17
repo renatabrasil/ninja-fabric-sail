@@ -1,8 +1,10 @@
-package br.com.ninja.poc.factory_method;
+package br.com.ninja.designpatterns.strategy;
 
-import br.com.ninja.poc.factory_method.strategies.MarineVehicleStrategy;
-import br.com.ninja.poc.factory_method.strategies.RoadVehicleStrategy;
-import br.com.ninja.poc.factory_method.strategies.VehicleStrategy;
+import br.com.ninja.designpatterns.strategy.Channel;
+import br.com.ninja.designpatterns.strategy.VehicleSelectorStrategyImpl;
+import br.com.ninja.designpatterns.strategy.strategies.MarineVehicleStrategy;
+import br.com.ninja.designpatterns.strategy.strategies.RoadVehicleStrategy;
+import br.com.ninja.designpatterns.strategy.strategies.VehicleStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

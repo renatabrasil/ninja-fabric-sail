@@ -1,4 +1,4 @@
-package br.com.ninja.poc.factory_method.strategies;
+package br.com.ninja.designpatterns.strategy.strategies;
 
 public class MarineVehicleStrategy implements VehicleStrategy {
     @Override
