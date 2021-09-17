@@ -1,4 +1,4 @@
 package br.com.ninja.kafka.domain;
 
-public class CriarEAtualizarConta {
+public class Road {
 }

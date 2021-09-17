@@ -1,0 +1,53 @@
+@startuml
+
+title Diagrama de classes
+
+package controllers #DDDDDD {
+    class AdministratorController{
+        String login()
+    }
+}
+
+
+package designpatterns.strategy #DDDDDD {
+    enum Channel{}
+    interface VehicleSelectorStrategy{
+        VehicleStrategy getVehicle(String channel;
+        void execute(String payload, String event)
+    }
+    class VehicleSelectorStrategyImpl{}
+
+    VehicleSelectorStrategy <.. VehicleSelectorStrategyImpl
+
+    package designpatterns.strategy.strategies #DDDDDD {
+        interface VehicleStrategy {
+            boolean canDrive(String channel)
+            void drive()
+        }
+        class RoadVehicleStrategy{}
+        class MarineVehicleStrategy{}
+
+        VehicleStrategy <.. RoadVehicleStrategy
+        VehicleStrategy <.. MarineVehicleStrategy
+    }
+
+    VehicleSelectorStrategy --> VehicleStrategy
+}
+
+package kafka #DDDDDD {
+    class Consumer{}
+    class Producer {}
+
+    package kafka.controllers #DDDDDD {
+        class KafkaController {}
+    }
+
+    package kafka.domain #DDDDDD {
+        class Road {}
+    }
+
+    KafkaController --> Producer
+    Producer --> VehicleSelectorStrategy
+}
+
+@enduml

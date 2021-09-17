@@ -5,6 +5,10 @@
 
 ![](docs/conceptual_map.svg)
 
+**Organizacao das classes**
+
+![](docs/Diagrama de classes.svg)
+
 -----
 
 ### Problemas no build

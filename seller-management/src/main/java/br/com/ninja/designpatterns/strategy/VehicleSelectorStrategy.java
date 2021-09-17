@@ -2,8 +2,8 @@ package br.com.ninja.designpatterns.strategy;
 
 import br.com.ninja.designpatterns.strategy.strategies.VehicleStrategy;
 
-public interface VehicleProducerSelectorStrategy {
+public interface VehicleSelectorStrategy {
     VehicleStrategy getVehicle(String channel);
 
-    void produce(String payload, String event);
+    void execute(String payload, String event);
 }

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Objects;
 
-public class VehicleSelectorStrategyImpl implements VehicleProducerSelectorStrategy {
+public class VehicleSelectorStrategyImpl implements VehicleSelectorStrategy {
 
     private List<VehicleStrategy> vehicleStrategies;
 
@@ -19,7 +19,7 @@ public class VehicleSelectorStrategyImpl implements VehicleProducerSelectorStrat
         return vehicleStrategies.stream().filter(it -> it.canDrive(channel)).findFirst().orElse(null);
     }
 
-    public void produce(String payload, String eventType) {
+    public void execute(String payload, String eventType) {
         VehicleStrategy vehicleStrategy = getVehicle(eventType);
         if (Objects.nonNull(vehicleStrategy)) {
             vehicleStrategy.drive();

@@ -1,6 +1,6 @@
 package br.com.ninja.kafka;
 
-import br.com.ninja.designpatterns.strategy.VehicleProducerSelectorStrategy;
+import br.com.ninja.designpatterns.strategy.VehicleSelectorStrategy;
 import br.com.ninja.designpatterns.strategy.VehicleSelectorStrategyImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,14 +8,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class Producer {
 
-    private VehicleProducerSelectorStrategy producerFactory;
+    private VehicleSelectorStrategy vehicleSelectorStrategy;
 
     @Autowired
-    public Producer(VehicleSelectorStrategyImpl producerFactory) {
-        this.producerFactory = producerFactory;
+    public Producer(VehicleSelectorStrategy vehicleSelectorStrategy) {
+        this.vehicleSelectorStrategy = vehicleSelectorStrategy;
     }
 
     public void sendMessage(String message) {
-        producerFactory.produce(message, "");
+        vehicleSelectorStrategy.execute(message, "");
     }
 }
