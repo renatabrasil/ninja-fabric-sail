@@ -1,17 +1,17 @@
 package br.com.ninja.kafka;
 
-import br.com.ninja.poc.factory_method.FinancialSecrecyProducerFactory;
-import br.com.ninja.poc.factory_method.FinancialSecrecyProducerFactoryImpl;
+import br.com.ninja.poc.factory_method.VehicleProducerSelectorStrategy;
+import br.com.ninja.poc.factory_method.VehicleSelectorStrategyImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class Producer {
 
-    private FinancialSecrecyProducerFactory producerFactory;
+    private VehicleProducerSelectorStrategy producerFactory;
 
     @Autowired
-    public Producer(FinancialSecrecyProducerFactoryImpl producerFactory) {
+    public Producer(VehicleSelectorStrategyImpl producerFactory) {
         this.producerFactory = producerFactory;
     }
 
