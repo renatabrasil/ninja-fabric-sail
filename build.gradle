@@ -30,11 +30,18 @@ sonarqube {
     }
 }
 
-project.tasks["sonarqube"].dependsOn "jacocoTestReport"
+project.tasks["sonarqube"].dependsOn "test"
+
+//tasks['sonarqube'].with {
+//    dependsOn.clear()
+//    dependsOn test
+//}
 
 subprojects {
+    apply plugin: 'java'
 
     subprojects.tasks["sonarqube"].dependsOn ["test"]
+
 
     sonarqube {
         properties {
@@ -48,24 +55,9 @@ subprojects {
             xml.enabled ( true)
         }
     }
-//    jacocoTestReport.enabled(true)
-//    jacocoTestReport.reports.xml.enabled(true)
-//    jacocoTestReport.executionData("${subprojects.buildDir}/jacoco/test.exec")
-//        sourceDirectories = files(coverageSourceDirs)
-//        executionData = files('build/jacoco/testDebug.exec')
-//        executionData = files("${buildDir}/jacoco/testDebugUnitTest.exec")
-//    }
-
-
-    test {
-        useJUnitPlatform()
-    }
 }
 
-jacocoTestReport {
-    // Forcing the execution of 'test' before the execution of 'jacocoTestReport'
-    dependsOn test
-}
+test.finalizedBy jacocoTestReport
 
 
 
