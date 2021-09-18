@@ -30,7 +30,11 @@ sonarqube {
     }
 }
 
+project.tasks["sonarqube"].dependsOn "jacocoTestReport"
+
 subprojects {
+
+    subprojects.tasks["sonarqube"].dependsOn ["test"]
 
     sonarqube {
         properties {
