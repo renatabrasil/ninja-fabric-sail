@@ -21,27 +21,23 @@ test {
     useJUnitPlatform()
 }
 
+
 sonarqube {
     properties {
         property "sonar.projectKey", "renatabrasil_ninja-fabric-sale"
         property "sonar.organization", "renatabrasil"
         property "sonar.host.url", "https://sonarcloud.io"
         property "sonar.sourceEncoding", "UTF-8"
+        property 'sonar.java.coveragePlugin', "jacoco"
+        property "sonar.coverage.jacoco.xmlReportPaths", "${rootDir}/build/reports/jacoco/codeCoverageReport/codeCoverageReport.xml"
     }
 }
 
-project.tasks["sonarqube"].dependsOn "test"
-
-//tasks['sonarqube'].with {
-//    dependsOn.clear()
-//    dependsOn test
-//}
 
 subprojects {
     apply plugin: 'java'
 
-    subprojects.tasks["sonarqube"].dependsOn ["test"]
-
+//    subprojects.tasks["sonarqube"].dependsOn ["test"]
 
     sonarqube {
         properties {
@@ -57,9 +53,41 @@ subprojects {
     }
 }
 
-test.finalizedBy jacocoTestReport
+task codeCoverageReport(type: JacocoReport) {
+
+    // Gather execution data from all subprojects
+    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+
+    // Add all relevant sourcesets from the subprojects
+    subprojects.each {
+        sourceSets it.sourceSets.main
+    }
+
+    reports {
+        xml.enabled true
+        html.enabled true
+        csv.enabled false
+    }
+}
+
+// always run the tests before generating the report
+codeCoverageReport.dependsOn {
+    subprojects*.test
+}
+
+//test.finalizedBy jacocoTestReport
 
 
+tasks.getByName('sonarqube') {
+    doFirst {
+        // lazy initialize the property to collect all coverage files
+        def jacocoFilesFromSubprojects = subprojects.findAll {it.plugins.hasPlugin('jacoco')}
+                .collect {it.tasks.withType(Test)}.flatten().collect {it.jacoco.destinationFile}
 
+        sonarqube.properties {
+            property "sonar.jacoco.reportPaths", jacocoFilesFromSubprojects.join(',')
+        }
+    }
+}
 
 
