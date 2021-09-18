@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
-public class VehicleSelectorStrategyImplTest {
+class VehicleSelectorStrategyImplTest {
 
     private VehicleSelectorStrategyImpl vehicleSelectorStrategy;
     private final VehicleStrategy vehicle1 = mock(VehicleStrategy.class);
@@ -23,7 +23,7 @@ public class VehicleSelectorStrategyImplTest {
 
     @BeforeEach
     public void init() {
-        List<VehicleStrategy> strategies = new ArrayList(Arrays.asList(vehicle1, vehicle2, vehicle3));
+        List<VehicleStrategy> strategies = Arrays.asList(vehicle1, vehicle2, vehicle3);
         vehicleSelectorStrategy = new VehicleSelectorStrategyImpl(strategies);
     }
 
