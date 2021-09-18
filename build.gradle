@@ -34,6 +34,7 @@ sonarqube {
 //		property "sonar.projectBaseDir", "seller-management/src"
         property "sonar.organization", "renatabrasil"
         property "sonar.host.url", "https://sonarcloud.io"
+
 //        property "sonar.exclusions", "**/*Generated.java"
 //		properties["sonar.sources"] += sourceSets.src
 //		properties["sonar.tests"] += sourceSets.integTest.allSource.srcDirs
@@ -63,7 +64,10 @@ subprojects {
     }
 }
 
-
+jacocoTestReport {
+    // Forcing the execution of 'test' before the execution of 'jacocoTestReport'
+    dependsOn test
+}
 
 
 

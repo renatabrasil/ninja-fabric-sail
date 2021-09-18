@@ -1,7 +1,5 @@
 package br.com.ninja.designpatterns.strategy;
 
-import br.com.ninja.designpatterns.strategy.Channel;
-import br.com.ninja.designpatterns.strategy.VehicleSelectorStrategyImpl;
 import br.com.ninja.designpatterns.strategy.strategies.MarineVehicleStrategy;
 import br.com.ninja.designpatterns.strategy.strategies.RoadVehicleStrategy;
 import br.com.ninja.designpatterns.strategy.strategies.VehicleStrategy;
