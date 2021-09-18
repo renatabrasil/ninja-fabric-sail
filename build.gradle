@@ -4,13 +4,6 @@ plugins {
     id 'jacoco'
 }
 
-//apply plugin: 'java'
-//apply plugin: 'jacoco'
-
-//jacoco {
-//    toolVersion = "0.7.5.201505241946"
-//}
-
 group 'br.com.renata'
 version '1.0-SNAPSHOT'
 
@@ -31,17 +24,20 @@ test {
 sonarqube {
     properties {
         property "sonar.projectKey", "renatabrasil_ninja-fabric-sale"
-//		property "sonar.projectBaseDir", "seller-management/src"
         property "sonar.organization", "renatabrasil"
         property "sonar.host.url", "https://sonarcloud.io"
-
-//        property "sonar.exclusions", "**/*Generated.java"
-//		properties["sonar.sources"] += sourceSets.src
-//		properties["sonar.tests"] += sourceSets.integTest.allSource.srcDirs
+        property "sonar.sourceEncoding", "UTF-8"
     }
 }
 
 subprojects {
+
+    sonarqube {
+        properties {
+            property "sonar.sources", "src/main"
+            property "sonar.tests", "src/test"
+        }
+    }
 
     jacocoTestReport {
         reports {
@@ -58,9 +54,7 @@ subprojects {
 
 
     test {
-
         useJUnitPlatform()
-//        finalizedBy jacocoTestReport
     }
 }
 
