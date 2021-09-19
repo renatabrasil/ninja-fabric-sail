@@ -18,10 +18,13 @@ sonarqube {
         property "sonar.host.url", "https://sonarcloud.io"
         property "sonar.sourceEncoding", "UTF-8"
         property 'sonar.java.coveragePlugin', "jacoco"
-        property "sonar.coverage.jacoco.xmlReportPaths", "${rootDir}/build/reports/jacoco/codeCoverageReport/codeCoverageReport.xml"
+
+//        property "sonar.coverage.jacoco.xmlReportPaths", "${rootDir}/build/reports/jacoco/codeCoverageReport/codeCoverageReport.xml"
     }
 }
 
+
+//test.finalizedBy jacocoTestReport
 
 subprojects {
     apply plugin: 'java'
@@ -38,57 +41,58 @@ subprojects {
         testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
     }
 
-//    subprojects.tasks["sonarqube"].dependsOn ["test"]
-
     sonarqube {
+
         properties {
             property "sonar.sources", "src/main"
             property "sonar.tests", "src/test"
+            property "sonar.coverage.jacoco.xmlReportPaths", "${buildDir}\\coverage-reports\\coverage.xml"
         }
+    }
+
+    task codeCoverageReport(type: JacocoReport) {
+
+        // Gather execution data from all subprojects
+        executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+
+        // Add all relevant sourcesets from the subprojects
+        subprojects.each {
+            sourceSets it.sourceSets.main
+        }
+
+        reports {
+            xml.enabled true
+            html.enabled true
+            csv.enabled false
+        }
+    }
+
+// always run the tests before generating the report
+    codeCoverageReport.dependsOn {
+        subprojects*.test
     }
 
     jacocoTestReport {
+        dependsOn(test)
         reports {
             xml.enabled(true)
+            html.enabled (true)
             xml.destination file("${buildDir}/coverage-reports/coverage.xml")
+            html.destination file("${buildDir}/coverage-reports/coverage.html")
         }
     }
 }
 
-task codeCoverageReport(type: JacocoReport) {
-
-    // Gather execution data from all subprojects
-    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
-
-    // Add all relevant sourcesets from the subprojects
-    subprojects.each {
-        sourceSets it.sourceSets.main
-    }
-
-    reports {
-        xml.enabled true
-        html.enabled true
-        csv.enabled false
-    }
-}
-
-// always run the tests before generating the report
-codeCoverageReport.dependsOn {
-    subprojects*.test
-}
-
-//test.finalizedBy jacocoTestReport
-
-
 tasks.getByName('sonarqube') {
+
     doFirst {
         // lazy initialize the property to collect all coverage files
         def jacocoFilesFromSubprojects = subprojects.findAll { it.plugins.hasPlugin('jacoco') }
                 .collect { it.tasks.withType(Test) }.flatten().collect { it.jacoco.destinationFile }
 
-        sonarqube.properties {
-            property "sonar.coverage.jacoco.xmlReportPaths", jacocoFilesFromSubprojects.join(',')
-        }
+//        sonarqube.properties {
+//            property "sonar.coverage.jacoco.xmlReportPaths", jacocoFilesFromSubprojects.join(',')
+//        }
     }
 }
 
