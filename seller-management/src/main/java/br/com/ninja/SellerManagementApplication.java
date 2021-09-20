@@ -1,4 +1,4 @@
-package br.com.ninja.application;
+package br.com.ninja;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.boot.SpringApplication;
@@ -16,8 +16,6 @@ public class SellerManagementApplication {
 
     @Bean
     public NewTopic topic() {
-//		Properties props = new Properties();
-//		props.setProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         return new NewTopic("pagamento", 1, (short) 1);
     }
 }
