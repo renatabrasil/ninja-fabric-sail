@@ -14,7 +14,7 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_DB: postgres
+          POSTGRES_DB: NinjaFabricSaleDB
           POSTGRES_PASSWORD: ${NINJA_DB_PASSWORD}
           POSTGRES_USER: postgres
         ports:
