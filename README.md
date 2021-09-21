@@ -9,7 +9,7 @@
 
 **Organizacao das classes**
 
-![](docs/diagrama_de_classes_alto_nivel/Diagrama de classes.svg)
+![](./docs/diagrama_de_classes_alto_nivel/Diagrama de classes.svg)
 
 -----
 
