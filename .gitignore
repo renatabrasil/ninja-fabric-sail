@@ -8,6 +8,7 @@ gradle
 seller-management/build/
 seller-management/.gradle/
 seller-management/gradle/
+seller-management/src/main/resources/secrets.properties
 
 # Log file
 *.log
