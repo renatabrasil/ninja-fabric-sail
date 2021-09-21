@@ -32,7 +32,23 @@ package designpatterns.strategy #DDDDDD {
     }
 
     VehicleSelectorStrategy --> VehicleStrategy
+
 }
+
+package repository #DDDDDD {
+    interface TruckRepository {
+        
+    }
+}
+
+
+package entities #DDDDDD {
+    class Truck {
+        
+    }
+}
+
+TruckRepository --> Truck
 
 package kafka #DDDDDD {
     class Consumer{}
