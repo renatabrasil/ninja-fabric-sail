@@ -10,21 +10,21 @@ jobs:
     name: Build Seller Management
     timeout-minutes: 10
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:latest
-        env:
-          POSTGRES_DB: NinjaFabricSaleDB
-          POSTGRES_PASSWORD: ${NINJA_DB_PASSWORD}
-          POSTGRES_USER: postgres
-        ports:
-          - 5432:5432
-        # Set health checks to wait until postgres has started
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+#    services:
+#      postgres:
+#        image: postgres:latest
+#        env:
+#          POSTGRES_DB: NinjaFabricSaleDB
+#          POSTGRES_PASSWORD: ${NINJA_DB_PASSWORD}
+#          POSTGRES_USER: postgres
+#        ports:
+#          - 5432:5432
+#        # Set health checks to wait until postgres has started
+#        options: >-
+#          --health-cmd pg_isready
+#          --health-interval 10s
+#          --health-timeout 5s
+#          --health-retries 5
     steps:
       - uses: actions/checkout@v2
         with:
@@ -49,10 +49,12 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
       - name: Build and analyze
+#        working-directory:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew build jacocoTestReport sonarqube --info
+        run: ./gradlew build -Dspring.profiles.active=qa jacocoTestReport sonarqube --info
+#        run: ./gradlew build -Dspring.profiles.active=qa jacocoTestReport
       - name: Stop containers
         working-directory: seller-management/
         if: always()
