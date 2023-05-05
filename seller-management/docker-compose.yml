@@ -1,4 +1,4 @@
-version: '3.6'
+version: '2.1'
 services:
   db:
     image: postgres:latest
@@ -101,6 +101,8 @@ services:
       - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+    depends_on:
+      - prometheus
     entrypoint:
       - sh
       - -euc

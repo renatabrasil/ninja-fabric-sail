@@ -6,9 +6,6 @@ plugins {
     id 'jacoco'
 }
 
-//application {
-//	mainClass = 'br.com.ninja.application.SellerManagementApplication'
-//}
 apply plugin: 'java'
 
 group = 'br.com.renata.seller-management'
@@ -34,6 +31,8 @@ dependencies {
     implementation 'org.springframework.kafka:spring-kafka:2.7.6'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.4'
     implementation 'org.springframework.boot:spring-boot-starter-data-rest:2.5.4'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'io.micrometer:micrometer-registry-prometheus'
     implementation 'org.postgresql:postgresql:42.2.1'
     implementation 'javax.xml.bind:jaxb-api:2.3.0'
     implementation 'org.javassist:javassist:3.28.0-GA'
