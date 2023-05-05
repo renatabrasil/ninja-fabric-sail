@@ -49,10 +49,12 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
       - name: Build and analyze
+        working-directory: /
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew build -Dspring.profiles.active=qa jacocoTestReport sonarqube --info
+#        run: ./gradlew build -Dspring.profiles.active=qa jacocoTestReport sonarqube --info
+          run: ./gradlew build -Dspring.profiles.active=qa jacocoTestReport
       - name: Stop containers
         working-directory: seller-management/
         if: always()
