@@ -1,18 +1,26 @@
 global:
-  scrape_interval: 1m
+  scrape_interval: 30s
 
 scrape_configs:
   - job_name: 'prometheus'
-    scrape_interval: 1m
+    scrape_interval: 30s
     static_configs:
       - targets: ['localhost:9090']
 
   - job_name: 'node'
     static_configs:
-      - targets: ['node-exporter:9100']
+      - targets: ['nodeexporter:9100']
 
-remote_write:
-  - url: '<Your Prometheus remote_write endpoint>'
-    basic_auth:
-      username: '<Your Grafana Username>'
-      password: '<Your Grafana API key>'
+  - job_name: 'apps'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 30s
+    static_configs:
+      - targets: ['host.docker.internal:9000']
+#        labels:
+#          group: 'production'
+
+#remote_write:
+#  - url: '<Your Prometheus remote_write endpoint>'
+#    basic_auth:
+#      username: '<Your Grafana Username>'
+#      password: '<Your Grafana API key>'
