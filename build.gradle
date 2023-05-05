@@ -17,14 +17,9 @@ sonarqube {
         property "sonar.organization", "renatabrasil"
         property "sonar.host.url", "https://sonarcloud.io"
         property "sonar.sourceEncoding", "UTF-8"
-
-
 //        property "sonar.coverage.jacoco.xmlReportPaths", "${rootDir}/build/reports/jacoco/codeCoverageReport/codeCoverageReport.xml"
     }
 }
-
-
-//test.finalizedBy jacocoTestReport
 
 subprojects {
     apply plugin: 'java'
@@ -94,10 +89,6 @@ tasks.getByName('sonarqube') {
         // lazy initialize the property to collect all coverage files
         def jacocoFilesFromSubprojects = subprojects.findAll { it.plugins.hasPlugin('jacoco') }
                 .collect { it.tasks.withType(Test) }.flatten().collect { it.jacoco.destinationFile }
-
-//        sonarqube.properties {
-//            property "sonar.coverage.jacoco.xmlReportPaths", jacocoFilesFromSubprojects.join(',')
-//        }
     }
 }
 
