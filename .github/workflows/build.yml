@@ -36,7 +36,7 @@ jobs:
           distribution: 'zulu'
       - name: Start containers
         working-directory: seller-management/
-        run: docker-compose -f "docker-compose.yml" up -d --build
+        run: docker-compose -f "docker-compose-ci.yml" up -d --build
       - name: Cache SonarCloud packages
         uses: actions/cache@v3
         with:
