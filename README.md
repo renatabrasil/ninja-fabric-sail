@@ -14,6 +14,16 @@
 
 -----
 
+### Observability
+
+The links below describe how to configure a Spring Boot Application with prometheus and grafana
+
+- https://medium.com/@contactkumaramit9139/monitoring-spring-boot-applications-with-prometheus-and-grafana-21445260dad4
+- https://medium.com/@luanrubensf/monitoring-spring-applications-with-prometheus-and-grafana-ae50bbdd1920 
+- https://betterprogramming.pub/how-to-monitor-a-spring-boot-app-with-prometheus-and-grafana-22e2338f97fc
+- https://refactorfirst.com/spring-boot-prometheus-grafana
+ 
+
 ### Problemas no build
 
 - O gradle só funcionou com a solução dada aqui: https://stackoverflow.com/questions/58282791/why-when-i-use-github-actions-ci-for-a-gradle-project-i-face-gradlew-permiss
