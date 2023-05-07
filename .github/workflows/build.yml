@@ -59,4 +59,4 @@ jobs:
       - name: Stop containers
         working-directory: seller-management/
         if: always()
-        run: docker-compose -f "docker-compose.yml" down
+        run: docker-compose -f "docker-compose-ci.yml" down
