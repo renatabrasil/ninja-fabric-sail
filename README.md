@@ -16,6 +16,9 @@
 
 ### Observability
 
+- [docker-compose.yaml <- Grafana + Loki](https://raw.githubusercontent.com/grafana/loki/main/examples/getting-started/docker-compose.yaml)
+- [Grafana + Loki](https://grafana.com/docs/loki/latest/getting-started/) 
+
 The links below describe how to configure a Spring Boot Application with prometheus and grafana
 
 - https://medium.com/@contactkumaramit9139/monitoring-spring-boot-applications-with-prometheus-and-grafana-21445260dad4
