@@ -117,6 +117,7 @@ services:
       - "9095"
     volumes:
       - ./loki-config.yaml:/etc/loki/config.yaml
+      - c:/docker/loki:/etc/loki/
     healthcheck:
       test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3100/ready || exit 1" ]
       interval: 10s
@@ -132,7 +133,7 @@ services:
     volumes:
       - ./promtail-local-config.yaml:/etc/promtail/config.yaml:ro
       - /var/run/docker.sock:/var/run/docker.sock
-#      - /var/log:/var/log
+      - c:/docker/log:/var/log/
     command: -config.file=/etc/promtail/config.yaml
     depends_on:
       - gateway
